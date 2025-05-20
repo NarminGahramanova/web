@@ -306,3 +306,9 @@
 // console.log((hesab)(45, 15));
 
 
+
+var x;
+x =5;
+var x
+x =4
+console.log(x);
