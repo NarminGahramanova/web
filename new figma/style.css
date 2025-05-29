@@ -1,0 +1,224 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-image: url(image/bg-masthead.jpg);
+}
+
+h1 {
+
+    font-size: 100px;
+}
+
+h3 {
+    padding-left: 5%;
+    font-size: 1.6rem;
+}
+
+.hcontent {
+    /* margin-left: 40px;  */
+    width: 100%;
+    height: 40%;
+    padding-top: 22%;
+    padding-left: 38%;
+}
+
+button {
+    width: 17%;
+    height: 70px;
+    margin: 10%;
+    background-color: #1d809f;
+    color: white;
+    font-size: 1.2REM;
+    border-radius: 5px;
+}
+
+main {
+    width: 100%;
+    height: auto;
+}
+
+.sctcontent_1 {
+    /* display: block;
+    justify-content: center;
+    align-items: center; */
+    /* margin: 7%; */
+    height: 45vh;
+    padding-left: 600px;
+    padding-top: 100px;
+    /* border: 2px solid black; */
+    font-size: 25px;
+
+}
+
+a {
+    color: cadetblue;
+}
+
+.btn_2 {
+    width: 15%;
+    height: 70px;
+    color: white;
+    margin-top: 5%;
+    margin-left: 22%;
+    background-color: #212529;
+}
+
+button:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+#ph4 {
+    font-size: 30PX;
+    /* padding-top: 100px; */
+    color: white;
+    padding-left: 880px;
+}
+
+.ph4 {
+    padding-left: 80px;
+    color: #ecb807;
+
+
+}
+
+.sctn_2 {
+    width: 100%;
+    height: 60vh;
+    background-color: #1d809f;
+    /* display: flex;
+    justify-content: center;  */
+
+}
+
+.images {
+    margin-left: 20%;
+    height: 30%;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 8%;
+    color: white;
+
+    /* border: 6px solid #ecb807; */
+
+}
+
+.sctn_3 {
+    background: url(image/bg-2.webp);
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 900px;
+    margin-bottom: 8%;
+}
+
+.sctn_31 {
+    width: 25%;
+    height: 300px;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 19%;
+    margin-left: 39%;
+
+}
+
+.btn3 {
+    margin-left: 43%;
+    width: 10%;
+    height: 70px;
+    border-radius: 5px;
+    background-color: #1d809f;
+}
+
+.sctn_41 {
+
+    height: 1100px;
+    padding-left: 350px;
+
+}
+
+.text {
+    padding-left: 500px;
+}
+
+#h3 {
+    padding-left: 100px;
+    color: #ecb807;
+}
+
+#h2 {
+
+    font-size: 50px;
+}
+
+/* .portdfolio {
+    width: 50%;
+
+}  */
+
+.conten_2 {
+    color: black;
+    display: flex;
+    margin-right: 52%;
+    ;
+}
+
+.DVCLS {
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.DVCLS:hover {
+    transition: all;
+     clip-path: inset(2em); 
+}
+
+.dvcls2 {}
+
+.sctn5 {
+    width: 100%;
+    height: 350px;
+    background-color: #1d809f;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+}
+
+.dvd {
+    margin-top: 5%;
+}
+
+.btn_a {
+    margin: 0;
+    width: 20%;
+    background-color: #212529;
+    color: white;
+}
+
+.btn_b {
+    margin-left: 200px;
+    margin-right: 0;
+    width: 20%;
+    background-color: white;
+    color: black;
+}
+.map{
+    width: 100%;
+    height: 400px   ;
+}
