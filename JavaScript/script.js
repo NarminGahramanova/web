@@ -461,7 +461,54 @@ while (i < 10) {
 
 
 
+// let n =5;
+
+// for (let i =0; i <= n; i++) {
+
+//   let space = '*'.repeat(n - i);
+//   let stars = ' '.repeat(i);
+//   for (let row = 10; i--)
+//   console.log(space + stars);
+// }
 
 
+// let n = 5;
 
+// for (let i = 0; i < n; i++) {
+//   let starsCount = n - i;           // Sol və sağdakı ulduzların sayı
+//   let spaceCount = i * 2;           // Ortadakı boşluq sayı
 
+//   let stars = '*'.repeat(starsCount);
+//   let space = ' '.repeat(spaceCount);
+
+//   console.log(stars + space + stars);
+// }
+let n=5;
+let start = 0
+for (let i =0 ; i <n ; i++){
+   let start = '*'.repeat(n-i)
+   let sp =" ".repeat(2*i)
+
+ console.log(start+sp+start);
+    }
+   for(let i =n-1 ;i>=0; i--){
+    let start = '*'.repeat(n-i)
+   let sp =" ".repeat(2*i)
+
+ console.log(start+sp+start);
+   }
+// let n = 5;
+
+// // Üst hissə
+// for (let i = 0; i < n; i++) {
+//   let stars = '*'.repeat(n - i);
+//   let spaces = ' '.repeat(i * 2 + 1);
+//   console.log(stars + spaces + stars);
+// }
+
+// // Alt hissə
+// for (let i = n - 1; i >= 0; i--) {
+//   let stars = '*'.repeat(n - i);
+//   let spaces = ' '.repeat(i * 2 + 1);
+//   console.log(stars + spaces + stars);
+// }

@@ -1,29 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>javascript</title>
+<meta charset="UTF-8" />
+<title>Spaceship with Coins and Score</title>
+<style>
+  body {
+    background: #111;
+    color: white;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  #grid {
+    display: grid;
+    grid-template-columns: repeat(11, 40px);
+    grid-template-rows: repeat(11, 40px);
+    gap: 2px;
+    margin-top: 20px;
+  }
+  .cell {
+    width: 40px;
+    height: 40px;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    position: relative;
+  }
+  .ship {
+    background: limegreen;
+    color: black;
+    font-weight: bold;
+  }
+  .coin {
+    color: gold;
+    font-weight: bold;
+    font-size: 24px;
+    user-select: none;
+  }
+  #commands {
+    width: 300px;
+    font-size: 18px;
+    padding: 5px;
+    margin-top: 10px;
+  }
+  button {
+    margin-top: 10px;
+    padding: 7px 15px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  #status {
+    margin-top: 15px;
+    font-size: 18px;
+    height: 24px;
+  }
+  #score {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+</style>
 </head>
-
 <body>
-    <h1>DAXIL OL</h1>
 
-<div>
-    <div class="ad">AD 
-        <input type="submit">
-    </div>
+<h2>Spaceship Movement Visualizer with Coins</h2>
+<label for="commands">Enter commands (R, L, A):</label>
+<input type="text" id="commands" placeholder="Example: RAALAL" />
+<button id="startBtn">Start</button>
+<div id="status"></div>
+<div id="score">Score: 0</div>
 
+<div id="grid"></div>
 
+<script>
+  const directions = ['↑', '→', '↓', '←']; // arrows for direction
+  const gridSize = 11;
+  let x, y, axis;
+  let score = 0;
+  const grid = document.getElementById("grid");
+  const status = document.getElementById("status");
+  const scoreDisplay = document.getElementById("score");
+  const commandsInput = document.getElementById("commands");
+  const startBtn = document.getElementById("startBtn");
 
-</div>
+  // Store coin positions as Set of "x,y"
+  let coins = new Set();
 
+  // Create grid cells
+  function createGrid() {
+    grid.innerHTML = '';
+    for (let i = 0; i < gridSize * gridSize; i++) {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+      grid.appendChild(cell);
+    }
+  }
 
-    <script src="script.js" type="text/javascript">
+  // Place random coins in grid (avoid starting pos)
+  function placeCoins(numCoins) {
+    coins.clear();
+    while (coins.size < numCoins) {
+      const cx = Math.floor(Math.random() * gridSize);
+      const cy = Math.floor(Math.random() * gridSize);
+      if (cx === Math.floor(gridSize/2) && cy === Math.floor(gridSize/2)) continue; // no coin at start
+      coins.add(`${cx},${cy}`);
+    }
+  }
 
+  // Draw spaceship and coins on the grid
+  function drawGrid() {
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach(c => {
+      c.classList.remove("ship");
+      c.textContent = '';
+      c.innerHTML = '';
+    });
 
-    </script>
+    // Draw coins
+    coins.forEach(pos => {
+      const [cx, cy] = pos.split(',').map(Number);
+      const idx = cy * gridSize + cx;
+      if(cells[idx]) {
+        cells[idx].innerHTML = '<span class="coin">💰</span>';
+      }
+    });
+
+    // Keep spaceship inside bounds
+    if (x < 0) x = 0;
+    if (y < 0) y = 0;
+    if (x >= gridSize) x = gridSize - 1;
+    if (y >= gridSize) y = gridSize - 1;
+
+    // Draw spaceship
+    const index = y * gridSize + x;
+    const cellsArr = Array.from(cells);
+    cellsArr[index].classList.add("ship");
+    cellsArr[index].textContent = directions[axis];
+  }
+
+  // Check if spaceship is on a coin, collect it
+  function collectCoin() {
+    const pos = `${x},${y}`;
+    if (coins.has(pos)) {
+      coins.delete(pos);
+      score++;
+      scoreDisplay.textContent = `Score: ${score}`;
+    }
+  }
+
+  // Main function to run commands with animation
+  async function runCommands(commands) {
+    x = Math.floor(gridSize / 2);
+    y = Math.floor(gridSize / 2);
+    axis = 0; // start facing up
+    score = 0;
+    scoreDisplay.textContent = `Score: ${score}`;
+    placeCoins(10); // place 10 coins randomly
+
+    status.textContent = "Running...";
+    collectCoin();
+    drawGrid();
+
+    for (let i = 0; i < commands.length; i++) {
+      const cmd = commands[i].toUpperCase();
+      await new Promise(res => setTimeout(res, 500)); // wait 500ms per command
+
+      if (cmd === 'R') {
+        axis = (axis + 1) % 4;
+      } else if (cmd === 'L') {
+        axis = (axis + 3) % 4;
+      } else if (cmd === 'A') {
+        if (axis === 0) y -= 1;
+        else if (axis === 1) x += 1;
+        else if (axis === 2) y += 1;
+        else if (axis === 3) x -= 1;
+      } else {
+        status.textContent = `Invalid command '${cmd}' at position ${i+1}`;
+        return;
+      }
+
+      collectCoin();
+      drawGrid();
+    }
+
+    status.textContent = `Done! Final position: x=${x}, y=${y}, direction=${directions[axis]}, Score: ${score}`;
+  }
+
+  // Initialize grid and add event listener to button
+  createGrid();
+
+  startBtn.addEventListener('click', () => {
+    const cmds = commandsInput.value.trim();
+    if (!cmds) {
+      status.textContent = "Please enter commands.";
+      return;
+    }
+    runCommands(cmds);
+  });
+</script>
+
 </body>
-
 </html>
